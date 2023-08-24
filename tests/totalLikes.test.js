@@ -10,6 +10,7 @@ const listWithOneBlog = [
     __v: 0
     }
 ]
+
 const listWithManyBlogs = [
     {
         _id: '5a422aa71b54a676234d17f8',
@@ -34,9 +35,16 @@ const listWithManyBlogs = [
         url: 'https://mitpress.mit.edu/books/introduction-algorithms',
         likes: 7,
         __v: 2
-    }
+    },
+    {
+        _id: '5a422aa71b54a676234d234f8',
+        title: 'Go nowhere',
+        author: 'Edsger W. Dijkstra',
+        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+        likes: 4,
+        __v: 0
+    },
 ];
-  
   
 describe('Total likes', () => {
     test('of empty list is zero', () => {
@@ -47,12 +55,49 @@ describe('Total likes', () => {
     })
     
     test('when list has only one blog, equals the likes of that', () => {
+
         const result = listHelper.totalLikes(listWithOneBlog)
         expect(result).toBe(5)
     })
 
     test('when list has many blogs, equals the likes of that', () => {
+
         const result = listHelper.totalLikes(listWithManyBlogs)
-        expect(result).toBe(22)
+        expect(result).toBe(26)
     })
 })
+
+describe('Most popular blog', () => {
+    test('when list of blogs is empty', () => {
+        const blogs = []
+        const result = listHelper.favouriteBlog(blogs)
+        expect(result).toEqual(null)
+    })
+    test('when list has one blog in it', () => {
+        const result = listHelper.favouriteBlog(listWithOneBlog)
+        expect(result).toEqual(listWithOneBlog[0])
+    })
+    test('when list has many blogs in it', () => {
+        const result = listHelper.favouriteBlog(listWithManyBlogs)
+        expect(result).toEqual(listWithManyBlogs[1])
+    })
+})
+
+
+describe('mostBlogs', () => {
+  test('should return null for an empty list', () => {
+    const emptyList = [];
+    const result = listHelper.mostBlogs(emptyList);
+    expect(result).toBeNull();
+  });
+
+  test('should return the author and blogs count for a list with one object', () => {
+    const result = listHelper.mostBlogs(listWithOneBlog);
+    expect(result).toEqual({ author: 'Edsger W. Dijkstra', blogs: 1 });
+  });
+
+  test('should return the author and blogs count for a list with many objects', () => {
+    const result = listHelper.mostBlogs(listWithManyBlogs);
+    expect(result).toEqual({ author: 'Edsger W. Dijkstra', blogs: 2 });
+  });
+});
