@@ -41,7 +41,7 @@ const listWithManyBlogs = [
         title: 'Go nowhere',
         author: 'Edsger W. Dijkstra',
         url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-        likes: 4,
+        likes: 6,
         __v: 0
     },
 ];
@@ -63,7 +63,7 @@ describe('Total likes', () => {
     test('when list has many blogs, equals the likes of that', () => {
 
         const result = listHelper.totalLikes(listWithManyBlogs)
-        expect(result).toBe(26)
+        expect(result).toBe(28)
     })
 })
 
@@ -100,4 +100,21 @@ describe('mostBlogs', () => {
     const result = listHelper.mostBlogs(listWithManyBlogs);
     expect(result).toEqual({ author: 'Edsger W. Dijkstra', blogs: 2 });
   });
+});
+describe('mostLikes', () => {
+    test('should return null for an empty list', () => {
+      const emptyList = [];
+      const result = listHelper.mostLikes(emptyList);
+      expect(result).toBeNull();
+    });
+  
+    test('should return the author and blogs count for a list with one object', () => {
+      const result = listHelper.mostLikes(listWithOneBlog);
+      expect(result).toEqual({ author: 'Edsger W. Dijkstra', likes: 5 });
+    });
+  
+    test('should return the author and blogs count for a list with many objects', () => {
+      const result = listHelper.mostLikes(listWithManyBlogs);
+      expect(result).toEqual({ author: 'Edsger W. Dijkstra', likes: 11 });
+    });
 });

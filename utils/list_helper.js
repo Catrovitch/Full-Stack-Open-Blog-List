@@ -54,9 +54,35 @@ function mostBlogs(blogList) {
   return mostBlogsInfo;
 }
 
+function mostLikes(blogList) {
+  if (blogList.length === 0) {
+    return null; // Return null for an empty list
+  }
+
+  const authorLikes = blogList.reduce((acc, blog) => {
+    if (blog.hasOwnProperty('author') && blog.hasOwnProperty('likes')) {
+      const author = blog.author;
+      const likes = blog.likes;
+      acc[author] = (acc[author] || 0) + likes;
+    }
+    return acc;
+  }, {});
+
+  const mostLikedAuthorInfo = Object.keys(authorLikes).reduce((most, author) => {
+    if (authorLikes[author] > (most.likes || 0)) {
+      most.author = author;
+      most.likes = authorLikes[author];
+    }
+    return most;
+  }, {});
+
+  return mostLikedAuthorInfo;
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favouriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
