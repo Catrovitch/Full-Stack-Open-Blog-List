@@ -24,7 +24,7 @@ blogsRouter.post('/', async (request, response) => {
   if (!decodedToken.id) {
     return response.status(401).json({ error: 'token invalid' })
   }
-  
+   
   if (!body.title || !body.url) {
     return response.status(400).json({ error: 'title and url are required' });
   }
