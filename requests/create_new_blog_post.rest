@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "Guitar blog",
-    "author": "BB King",
-    "url": "bbkingguitarblog.com",
-    "lkes": 1000
+    "title": "Orc blog",
+    "author": "That Orc",
+    "url": "Orc.com",
+    "likes": 3000
 }
