@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcnVtYW4iLCJpZCI6IjY0ZTlkN2NiY2NmZmY5OGU4MjQ5MDRhZiIsImlhdCI6MTY5MzEyOTMzMSwiZXhwIjoxNjkzMTMyOTMxfQ.fcCxQYZqWB9_B8aMdt_k_BroyFGFY7phw11SEeKyPe8
 
 {
-    "title": "Orc blog",
-    "author": "That Orc",
-    "url": "Orc.com",
-    "likes": 3000
+    "title": "Rhun blog",
+    "author": "Eastling",
+    "url": "bluewizard.com",
+    "likes": 1500
 }
