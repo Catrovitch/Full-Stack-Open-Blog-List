@@ -16,7 +16,8 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(400).json({ error: 'title and url are required' });
   }
 
-  const user = await User.findById(decodedToken.id)
+  const user = request.user
+
 
   const blog = new Blog({
     title: body.title,
@@ -61,6 +62,10 @@ blogsRouter.delete('/:id', async (request, response) => {
       return response.status(401).json({ error: 'unauthorized operation' });
     }
 
+    if (deletedBlog.user.toString() !== request.user.id) {
+      return response.status(401).json({ error: 'unauthorized operation' });
+    }
+    
     await Blog.findByIdAndRemove(id)
 
     response.status(204).end();

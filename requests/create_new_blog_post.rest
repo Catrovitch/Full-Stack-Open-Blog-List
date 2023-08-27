@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcnVtYW4iLCJpZCI6IjY0ZTlkN2NiY2NmZmY5OGU4MjQ5MDRhZiIsImlhdCI6MTY5MzEzMDAwOCwiZXhwIjoxNjkzMTMzNjA4fQ.oeJ_q5h3EjlZnUXSdLuixa-WPt6US5FTBoLio-UGTYQ
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNhcnVtYW4iLCJpZCI6IjY0ZTlkN2NiY2NmZmY5OGU4MjQ5MDRhZiIsImlhdCI6MTY5MzEzMTg2NSwiZXhwIjoxNjkzMTM1NDY1fQ.ajQcsf9EXR9iKWn09bVm3uFnQIoamAneOLomxFpLDmE
 
 {
     "title": "Rhun blog",
