@@ -14,14 +14,17 @@ const blogSchema = new mongoose.Schema({
 blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
-    returnedObject.user = {
-      username: returnedObject.user.username,
-      name: returnedObject.user.name,
-      id: returnedObject.user.id.toString()
-    };
+    if (returnedObject.user) {
+      returnedObject.user = {
+        username: returnedObject.user.username,
+        name: returnedObject.user.name,
+        id: returnedObject.user.id.toString()
+      };
+    }
     delete returnedObject._id;
     delete returnedObject.__v;
   }
-})
+});
+
 
 module.exports = mongoose.model('Blog', blogSchema) 

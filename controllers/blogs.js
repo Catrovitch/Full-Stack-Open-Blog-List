@@ -3,6 +3,12 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
+blogsRouter.get('/', async (request, response) => {
+  const blogs = await Blog.find({})
+    .populate('user', { username: 1, name: 1, id: 1 })
+  
+  response.status(200).json(blogs);
+});
 
 
 blogsRouter.post('/', async (request, response) => {
@@ -36,24 +42,21 @@ blogsRouter.post('/', async (request, response) => {
   response.status(201).json(savedBlog)
 })
 
-blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({})
-    .populate('user', { username: 1, name: 1, id: 1 })
-
-  response.json(blogs);
-});
 
 
 blogsRouter.delete('/:id', async (request, response) => {
   try {
     const id = request.params.id;
+
     const deletedBlog = await Blog.findById(id);
-    
+
     if (!deletedBlog) {
       return response.status(404).json({ error: 'Blog not found' });
     }
-
+    
+    console.log('here 4')
     const decodedToken = jwt.verify(request.token, process.env.SECRET);
+    console.log('here 5')
     if (!decodedToken.id) {
       return response.status(401).json({ error: 'token invalid' });
     }
@@ -65,11 +68,12 @@ blogsRouter.delete('/:id', async (request, response) => {
     if (deletedBlog.user.toString() !== request.user.id) {
       return response.status(401).json({ error: 'unauthorized operation' });
     }
-    
+
     await Blog.findByIdAndRemove(id)
 
     response.status(204).end();
   } catch (error) {
+
     response.status(500).json({ error: 'An error occurred' });
   }
 });

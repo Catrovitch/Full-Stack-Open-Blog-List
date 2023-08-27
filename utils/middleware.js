@@ -11,14 +11,24 @@ const tokenExtractor = (request, response, next) => {
 };
 
 const userExtractor = async (request, response, next) => {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  try {
+    if (request.token) {
+      const decodedToken = jwt.verify(request.token, process.env.SECRET);
 
-  if (decodedToken.id) {
-    request.user = await User.findById(decodedToken.id)
+      if (decodedToken.id) {
+        request.user = await User.findById(decodedToken.id);
+      }
+    }
+  } catch (error) {
+    console.error('Error in userExtractor:', error.message);
   }
 
-  next()
-}
+  next();
+};
+
+module.exports = userExtractor;
+
+
 
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
