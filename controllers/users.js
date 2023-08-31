@@ -9,6 +9,16 @@ usersRouter.get('/', async (request, response) => {
   response.json(users)
 })
 
+usersRouter.get('/:id', async (request, response) => {
+  const id = request.params.id
+  const user = await User.findById(id)
+
+  if (!user) {
+    return response.status(404).json({error: 'No use with given id'})
+  }
+  response.status(201).json(user)
+})
+
 
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body;

@@ -24,7 +24,6 @@ blogsRouter.post('/', async (request, response) => {
 
   const user = request.user
 
-
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -45,18 +44,17 @@ blogsRouter.post('/', async (request, response) => {
 
 
 blogsRouter.delete('/:id', async (request, response) => {
+
   try {
     const id = request.params.id;
-
     const deletedBlog = await Blog.findById(id);
 
     if (!deletedBlog) {
       return response.status(404).json({ error: 'Blog not found' });
     }
-    
-    console.log('here 4')
+
     const decodedToken = jwt.verify(request.token, process.env.SECRET);
-    console.log('here 5')
+
     if (!decodedToken.id) {
       return response.status(401).json({ error: 'token invalid' });
     }
